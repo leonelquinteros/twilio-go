@@ -2707,5 +2707,26 @@ var cmdCreateResponse = []byte(`
 }
 `)
 
+var phoneLookupResponse = []byte(`
+{
+    "country_code": "US",
+    "phone_number": "+14157012312",
+    "national_format": "(415) 701-2312",
+    "url": "https://lookups.twilio.com/v1/PhoneNumber/+14157012312",
+    "caller_name": {
+        "caller_name": "CCSF",
+        "caller_type": "BUSINESS",
+        "error_code": null
+    },    
+    "carrier": {
+        "type": "landline",
+        "error_code": null,
+        "mobile_network_code": null,
+        "mobile_country_code": null,
+        "name": "Pacific Bell"
+    }
+}	
+`)
+
 const from = "+19253920364"
 const to = "+19253920364"

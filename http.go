@@ -50,6 +50,10 @@ const APIVersion = "2010-04-01"
 const NotifyBaseURL = "https://notify.twilio.com"
 const NotifyVersion = "v1"
 
+// Lookup service
+const LookupBaseURL = "https://lookups.twilio.com"
+const LookupVersion = "v1"
+
 type Client struct {
 	*rest.Client
 	Monitor  *Client
@@ -57,6 +61,7 @@ type Client struct {
 	Fax      *Client
 	Wireless *Client
 	Notify   *Client
+	Lookup   *Client
 
 	// FullPath takes a path part (e.g. "Messages") and
 	// returns the full API path, including the version (e.g.
@@ -100,6 +105,9 @@ type Client struct {
 
 	// NewNotifyClient initializes these services
 	Credentials *NotifyCredentialsService
+
+	// NewLookupClient initializes these services
+	Lookups *LookupsService
 }
 
 const defaultTimeout = 30*time.Second + 500*time.Millisecond
@@ -226,6 +234,14 @@ func NewNotifyClient(accountSid string, authToken string, httpClient *http.Clien
 	c := newNewClient(accountSid, authToken, NotifyBaseURL, httpClient)
 	c.APIVersion = NotifyVersion
 	c.Credentials = &NotifyCredentialsService{client: c}
+	return c
+}
+
+// NewLookupClient returns a new Client to use the lookups API
+func NewLookupClient(accountSid string, authToken string, httpClient *http.Client) *Client {
+	c := newNewClient(accountSid, authToken, LookupBaseURL, httpClient)
+	c.APIVersion = LookupVersion
+	c.Lookups = &LookupsService{client: c}
 	return c
 }
 
