@@ -7,7 +7,7 @@ import (
 
 const phoneNumbersPath = "PhoneNumbers"
 
-type LookupsService struct {
+type LookupPhoneNumbersService struct {
 	client *Client
 }
 
@@ -35,12 +35,8 @@ type PhoneLookup struct {
 }
 
 // Get calls the lookups API to retrieve information about a phone number
-func (ls *LookupsService) Get(ctx context.Context, phone string) (*PhoneLookup, error) {
-	data := url.Values{}
-	data.Add("Type", "carrier")
-	data.Add("Type", "caller-name")
-
+func (s *LookupPhoneNumbersService) Get(ctx context.Context, phone string, data url.Values) (*PhoneLookup, error) {
 	lookup := new(PhoneLookup)
-	err := ls.client.MakeRequest(ctx, "GET", phoneNumbersPath+"/"+phone, data, lookup)
+	err := s.client.MakeRequest(ctx, "GET", phoneNumbersPath+"/"+phone, data, lookup)
 	return lookup, err
 }

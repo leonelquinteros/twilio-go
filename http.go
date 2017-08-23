@@ -107,7 +107,7 @@ type Client struct {
 	Credentials *NotifyCredentialsService
 
 	// NewLookupClient initializes these services
-	Lookups *LookupsService
+	LookupPhoneNumbers *LookupPhoneNumbersService
 }
 
 const defaultTimeout = 30*time.Second + 500*time.Millisecond
@@ -241,7 +241,7 @@ func NewNotifyClient(accountSid string, authToken string, httpClient *http.Clien
 func NewLookupClient(accountSid string, authToken string, httpClient *http.Client) *Client {
 	c := newNewClient(accountSid, authToken, LookupBaseURL, httpClient)
 	c.APIVersion = LookupVersion
-	c.Lookups = &LookupsService{client: c}
+	c.LookupPhoneNumbers = &LookupPhoneNumbersService{client: c}
 	return c
 }
 
@@ -268,6 +268,7 @@ func NewClient(accountSid string, authToken string, httpClient *http.Client) *Cl
 	c.Fax = NewFaxClient(accountSid, authToken, httpClient)
 	c.Wireless = NewWirelessClient(accountSid, authToken, httpClient)
 	c.Notify = NewNotifyClient(accountSid, authToken, httpClient)
+	c.Lookup = NewLookupClient(accountSid, authToken, httpClient)
 
 	c.Accounts = &AccountService{client: c}
 	c.Applications = &ApplicationService{client: c}

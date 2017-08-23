@@ -2,6 +2,7 @@ package twilio
 
 import (
 	"context"
+	"net/url"
 	"os"
 	"testing"
 	"time"
@@ -13,7 +14,11 @@ func TestGetPhoneLookup(t *testing.T) {
 	defer s.Close()
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
-	lookup, err := client.Lookups.Get(ctx, "4157012312")
+
+	data := url.Values{}
+	data.Add("Type", "carrier")
+	data.Add("Type", "caller-name")
+	lookup, err := client.Lookup.LookupPhoneNumbers.Get(ctx, "4157012312", data)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -29,9 +34,12 @@ func TestGetPhoneLookup(t *testing.T) {
 }
 
 func TestRealLookup(t *testing.T) {
-	cli := NewLookupClient(os.Getenv("TWILIO_ACCOUNT_SID"), os.Getenv("TWILIO_AUTH_TOKEN"), nil)
+	cli := NewClient(os.Getenv("TWILIO_ACCOUNT_SID"), os.Getenv("TWILIO_AUTH_TOKEN"), nil)
 
-	l, err := cli.Lookups.Get(context.TODO(), "4157012311")
+	data := url.Values{}
+	data.Add("Type", "carrier")
+	data.Add("Type", "caller-name")
+	_, err := cli.Lookup.LookupPhoneNumbers.Get(context.TODO(), "4157012311", data)
 	if err != nil {
 		t.Error(err.Error())
 	}

@@ -1,5 +1,1 @@
 /bazel-*
-
-# Ignore Eclipse settings
-.project
-.settings
