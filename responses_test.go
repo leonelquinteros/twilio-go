@@ -69,6 +69,7 @@ func getServer(response []byte) (*Client, *Server) {
 	client.Fax.Base = s.URL
 	client.Wireless.Base = s.URL
 	client.Notify.Base = s.URL
+	client.Lookup.Base = s.URL
 	return client, s
 }
 
@@ -81,6 +82,7 @@ func getServerCode(response []byte, code int) (*Client, *Server) {
 	client.Pricing.Base = s.URL
 	client.Wireless.Base = s.URL
 	client.Notify.Base = s.URL
+	client.Lookup.Base = s.URL
 	return client, s
 }
 

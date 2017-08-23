@@ -5,14 +5,13 @@ import (
 	"net/url"
 	"os"
 	"testing"
-	"time"
 )
 
-func TestGetPhoneLookup(t *testing.T) {
+func TestLookupPhoneNumbersGet(t *testing.T) {
 	t.Parallel()
 	client, s := getServer(phoneLookupResponse)
 	defer s.Close()
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
 	data := url.Values{}
@@ -33,7 +32,7 @@ func TestGetPhoneLookup(t *testing.T) {
 	}
 }
 
-func TestRealLookup(t *testing.T) {
+func TestLookupPhoneNumbersGetReal(t *testing.T) {
 	cli := NewClient(os.Getenv("TWILIO_ACCOUNT_SID"), os.Getenv("TWILIO_AUTH_TOKEN"), nil)
 
 	data := url.Values{}
