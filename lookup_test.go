@@ -31,15 +31,3 @@ func TestLookupPhoneNumbersGet(t *testing.T) {
 		t.Errorf("expected Carrier.Type to be %s, got %s", "landline", lookup.Carrier.Type)
 	}
 }
-
-func TestLookupPhoneNumbersGetReal(t *testing.T) {
-	cli := NewClient(os.Getenv("TWILIO_ACCOUNT_SID"), os.Getenv("TWILIO_AUTH_TOKEN"), nil)
-
-	data := url.Values{}
-	data.Add("Type", "carrier")
-	data.Add("Type", "caller-name")
-	_, err := cli.Lookup.LookupPhoneNumbers.Get(context.TODO(), "4157012311", data)
-	if err != nil {
-		t.Error(err.Error())
-	}
-}
