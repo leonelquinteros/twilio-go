@@ -14,12 +14,12 @@ type LookupPhoneNumbersService struct {
 type CallerLookup struct {
 	CallerName string `json:"caller_name"`
 	CallerType string `json:"caller_type"`
-	ErrorCode  string `json:"error_code"`
+	ErrorCode  int    `json:"error_code"`
 }
 
 type CarrierLookup struct {
 	Type              string `json:"type"`
-	ErrorCode         string `json:"error_code"`
+	ErrorCode         int    `json:"error_code"`
 	MobileNetworkCode string `json:"mobile_network_code"`
 	MobileCountryCode string `json:"mobile_country_code"`
 	Name              string `json:"name"`
