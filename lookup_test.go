@@ -3,7 +3,6 @@ package twilio
 import (
 	"context"
 	"net/url"
-	"os"
 	"testing"
 )
 
